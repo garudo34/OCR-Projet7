@@ -1,0 +1,261 @@
+header {
+    height: 670px;
+    background-image: url("../assets/lampos-aritonang-24gR_9lCdes-unsplash\ 1.png");
+    background-size: cover;
+}
+
+header nav img#logo {
+    height: 25px;
+}
+
+header .search-header {
+    padding-top: 12em;
+    padding-bottom: 12rem;
+}
+
+header h1 {
+    font-family: 'Anton';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 66px;
+    text-align: center;
+    color: #FFD15B;
+}
+
+header .input-group-search {
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: #7A7A7A;
+}
+
+header .input-group-search input {
+    border: none;
+}
+
+header .input-group-search input.form-control:focus {
+    border: none;
+    box-shadow: none;
+}
+
+header .input-group-search button {
+    background-color: #1B1B1B;
+    border-radius: 10px !important;
+    margin: 10px !important;
+    width: 51px;
+    height: 52px;
+    color: #FFFFFF;
+}
+
+header .input-group-search button:hover {
+    background-color: #FFD15B;
+}
+
+main {
+    background-color: #E5E5E5;
+}
+
+.card {
+    height: 731px;
+    overflow-y: scroll;
+    border: none;
+    border-radius: 21px;
+}
+
+.card img.card-img-top {
+    height: 253px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+.card-body .card-title {
+    font-family: 'Anton';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    color: #000000;
+    margin-bottom: 30px;
+}
+
+.card-body .card-text.text-clamping {
+    -webkit-line-clamp: 5;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  
+}
+
+.card-body h5 {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #7A7A7A;
+    margin-bottom: 15px;
+}
+
+.card-body .card-text {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    color: #1B1B1B;
+    margin-bottom: 32px;
+}
+
+.card-ingredient {
+    height: 165px;
+}
+
+.card-ingredient>div {
+    width: 50%;
+}
+
+.ingredient-title {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    color: #1B1B1B;
+}
+
+.ingredient-quantity {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    color: #7A7A7A;
+}
+
+.dropdown-toggle {
+    text-align: left;
+    position: relative;
+    background-color: #FFFFFF;
+    color: #1B1B1B;
+    border-radius: 11px;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    min-width: 195px;
+    height: 56px;
+    border: none;
+}
+
+.dropdown-toggle:hover, .dropdown-toggle:active, .dropdown-toggle:focus {
+    background-color: #FFF !important;
+    border: none;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+.dropdown-toggle>i {
+    position: absolute;
+    right: 12px;
+    top: 17px;
+}
+
+.dropdown-toggle.show {
+    background-color: #FFF;
+    border: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.dropdown-toggle i.fa-chevron-up {
+    display: none;
+}
+
+.dropdown-toggle.show i.fa-chevron-up {
+    display: inline;
+}
+
+.dropdown-toggle.show i.fa-chevron-down {
+    display: none;
+}
+
+.dropdown-menu.show {
+    /* width: 195px; */
+    columns: 3;
+    border: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-top: -2px !important;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    color: #1B1B1B;
+}
+
+.dropdown-menu input {
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-right: none;
+}
+
+.dropdown-menu input:focus {
+    border-color: var(--bs-border-color);
+    box-shadow: none;
+}
+
+.dropdown-menu .input-group-text {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-left: none;
+    background-color: #FFF;
+    color: #7A7A7A;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 9px;
+    width: 9px;
+    background: url("../assets/Vector.svg") no-repeat;
+}
+
+.tags--list:not(:empty) {
+    border: 2px solid #7A7A7A;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tags--list .tag {
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    background: #FFD15B;
+    color: #000;
+    cursor: pointer;
+}
+
+.tag i {
+    font-size: 14px;
+    margin-left: 5px;
+}
+
