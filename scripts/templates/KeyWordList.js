@@ -1,8 +1,8 @@
 class KeyWordList {
-
     static init(recipes) {
         const { IngredientsDropdown, UstensilsDropdown, AppareilsDropdown } = this.createKeywordLists(recipes);
         this.$dropdownWrapper = document.querySelector('.keyword--section')
+        this.$dropdownWrapper.innerHTML = ""
         this.$dropdownWrapper.appendChild(IngredientsDropdown.render())
         this.$dropdownWrapper.appendChild(UstensilsDropdown.render())
         this.$dropdownWrapper.appendChild(AppareilsDropdown.render())
@@ -51,42 +51,8 @@ class KeyWordList {
         return { IngredientsDropdown, UstensilsDropdown, AppareilsDropdown };
     }
 
-    handleList() {
-        const listElements = this.$wrapper.querySelectorAll('.dropdown-item')
-        Array.from(listElements).forEach((element) => {
-            element.addEventListener('click', (event) => {
-                if (!this._tags.includes(event.target.innerText)) {
-                    this._tags.push(event.target.innerText)
-                    console.log(this._type, this._tags)
-                    const Tag = new TagElement(event.target.innerText)
-                    Tag.render()
-                    // effectuer une recherche de recette
-                    if (this._type === 'ingredients') {
-                        
-                    }
-                    if (this._type === 'ustensils') {
-                        
-                    }
-                    if (this._type === 'appareils') {
-                        
-                    }
-                }
-                
-                // mettre à jour la liste des mots clés dans les dropdown
-            })
-        })
-    }
-
-    removeElement() {
-        document.addEventListener('click', (e) => {
-            if (e.target.tagName === 'I' && e.target.classList.contains('delete-tag') && this._tags.includes(e.target.getAttribute('data-item'))) {
-                const value = e.target.getAttribute('data-item')
-                const index = this._tags.indexOf(value)
-                this._tags = [...this._tags.slice(0, index), ...this._tags.slice(index +1)]
-                const tagToDelete = document.querySelector(`[data-item="${value}"]`);
-                tagToDelete.parentElement.remove()
-            }
-        })
+    createListeElement(element, type) {
+        return `<li><span class="dropdown-item" data-type="${type}">${element.charAt(0).toUpperCase() + element.slice(1)}</span></li>`
     }
 
     render() {
@@ -104,15 +70,11 @@ class KeyWordList {
                             <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
                         </div>
                     </li>
-                    ${this._list.map(function(element) {
-                        return `<li><span class="dropdown-item">${element.charAt(0).toUpperCase() + element.slice(1)}</span></li>`
-                    }).join("")}
+                    ${this._list.map(element => this.createListeElement(element, this._type)).join("")}
                 </ul>
             </div>
         `
         this.$wrapper.innerHTML = $dropdownList
-        this.handleList()
-        this.removeElement()
         return this.$wrapper
     }
 }

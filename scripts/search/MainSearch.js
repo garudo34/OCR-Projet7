@@ -8,7 +8,7 @@ class Search {
     }
 }
 
-class RecipeNameSearch extends Search {
+class RecipeMainSearch extends Search {
     constructor(Recipes) {
         super(Recipes)
     }

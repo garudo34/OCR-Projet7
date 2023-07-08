@@ -1,10 +1,7 @@
 class SearchForm {
     constructor(Recipes) {
         this.Recipes = Recipes
-        this.isSearchingByIngredients = false
-        this.isSearchingByUstensils = false
-
-        this.RecipeNameSearch = new RecipeNameSearch(Recipes)
+        this.RecipeMainSearch = new RecipeMainSearch(Recipes)
 
         this.$wrapper = document.createElement('div')
         this.$searchFormWrapper = document.querySelector('.search-form-wrapper')
@@ -13,8 +10,7 @@ class SearchForm {
     }
 
     search(query) {
-        let SearchedRecipes = null
-        SearchedRecipes = this.RecipeNameSearch.search(query)
+        const SearchedRecipes = this.RecipeMainSearch.search(query)
         this.displayRecipes(SearchedRecipes, query)
     }
 
