@@ -6,6 +6,7 @@ class KeyWordList {
         this.$dropdownWrapper.appendChild(IngredientsDropdown.render())
         this.$dropdownWrapper.appendChild(UstensilsDropdown.render())
         this.$dropdownWrapper.appendChild(AppareilsDropdown.render())
+        this.onInputSearch(IngredientsDropdown, UstensilsDropdown, AppareilsDropdown)
     }
 
     constructor(name, type, list) {
@@ -13,11 +14,42 @@ class KeyWordList {
         this._type = type
         this._list = list
         this.$wrapper = document.createElement('div')
-        this.$wrapper.classList.add('col-3')
+        this.$wrapper.classList.add('col-3', `dropdown-${this._type.toLowerCase()}`)
         this._tags = []
-
     }
 
+    static onInputSearch (IngredientsDropdown, UstensilsDropdown, AppareilsDropdown) {
+        const inputs = document.querySelectorAll('.search-list')
+        Array.from(inputs).forEach((input) => {
+            input.addEventListener('input', (e) => {
+                const query = input.value.toLowerCase()
+                const listId = input.id
+                var typeDropDown = null
+                if(listId === 'search-ingredients') {
+                    typeDropDown = IngredientsDropdown
+                } else if(listId === 'search-ustensils'){
+                    typeDropDown = UstensilsDropdown
+                } else if(listId === 'search-appareils') {
+                    typeDropDown = AppareilsDropdown
+                }
+                const tagMatched = typeDropDown._list.filter(element => element.toLowerCase().includes(query))
+                this.refreshDropDown(typeDropDown, tagMatched)
+            });
+        })
+    }
+
+    static refreshDropDown(DropDownElement, listValue) {
+        const wrapperToUpdate = document.querySelector(`.dropdown-${DropDownElement._type}`)
+        var listElements =  wrapperToUpdate.querySelectorAll(`[data-type="${DropDownElement._type}"]`)
+        Array.from(listElements).forEach((element) => {
+            if (!listValue.includes(element.textContent.toLowerCase())){
+                element.parentElement.style.display = "none"
+            } else {
+                element.parentElement.style.display = "block"
+            }
+        })
+    }
+    
     static createKeywordLists(recipes) {
         const ArrayIngredients = [];
         const ArrayUstensils = [];
@@ -65,7 +97,7 @@ class KeyWordList {
                 <ul class="dropdown-menu shadow-sm">
                     <li>
                         <div class="input-group mb-3 px-2">
-                            <input type="search" class="form-control" aria-label="${this._name}" aria-describedby="basic-addon1">
+                            <input type="search" class="form-control search-list" id="search-${this._name.toLowerCase()}" aria-label="${this._name.toLowerCase()}" aria-describedby="basic-addon1">
                             <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
                         </div>
                     </li>

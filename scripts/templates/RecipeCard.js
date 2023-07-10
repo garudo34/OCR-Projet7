@@ -10,6 +10,7 @@ class RecipeCard {
 
         const $recipeCard = `
             <div class="card">
+                <span class="card-cooking-time">${this._recipe.time}min</span>
                 <img src="${this._recipe.image}" class="card-img-top" alt="${this._recipe.name}">
                 <div class="card-body">
                     <h4 class="card-title">${this._recipe.name}</h4>

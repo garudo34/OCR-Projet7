@@ -12,7 +12,7 @@ class App {
         document.querySelector('form').addEventListener('keyup', this.onSearch)
         document.addEventListener('click', this.onTagRemove)
     }
-    
+
     fetchRecipes() {
         this.allRecipes = recipes.map(recipe => new Recipe(recipe))
     }
@@ -51,8 +51,8 @@ class App {
     }
 
     onTagRemove(e) {
-        e.preventDefault()
         if (e.target.tagName === 'I' && e.target.classList.contains('delete-tag') && this.tags.includes(e.target.getAttribute('data-item'))) {
+            e.preventDefault()
             this.fetchRecipes()
             const value = e.target.getAttribute('data-item')
             const index = this.tags.indexOf(value)
@@ -92,6 +92,12 @@ class App {
                 this.$recipesWrapper.appendChild(Template.createRecipeCard())
             })
         }
+        
+        // affichage du nombre de recettes trouvé
+        const $recipeQuantityWrapper = document.querySelector('.recipe-quantity--section')
+        let numberRecipes = recipesToDisplay.length
+        let recette = (numberRecipes>1 ? "recettes" : "recette")
+        $recipeQuantityWrapper.innerHTML = `${numberRecipes} ${recette}`
     }
 
     searchWithTags(ingredientsTags, ustensilsTags, appareilsTags) {
@@ -99,7 +105,7 @@ class App {
         ustensilsTags = ustensilsTags.map(tag => tag.toLowerCase());
         appareilsTags = appareilsTags.map(tag => tag.toLowerCase());
         var recipesByTags = [...this.allRecipes]
-        
+
         for (let i = 0; i < ingredientsTags.length; i++) {
             recipesByTags = recipesByTags.filter((recipe) => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(ingredientsTags[i])))
         }
@@ -152,12 +158,7 @@ class App {
         this.fetchRecipes()
         KeyWordList.init(this.allRecipes)
         this.onTagSelect()
-        this.allRecipes.forEach(recipe => {
-            const Template = new RecipeCard(recipe)
-            this.$recipesWrapper.appendChild(
-                Template.createRecipeCard()
-            )
-        })
+        this.displayRecipes(this.allRecipes)
     }
 }
 
