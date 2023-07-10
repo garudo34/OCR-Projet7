@@ -22,7 +22,6 @@ class KeyWordList {
         const ArrayIngredients = [];
         const ArrayUstensils = [];
         const ArrayAppareils = [];
-
         for (var recipe of recipes) {
             if (recipe.hasOwnProperty("_ingredients")) {
                 recipe._ingredients.forEach(ingredient => {
