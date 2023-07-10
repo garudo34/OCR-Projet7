@@ -1,13 +1,62 @@
 class App {
     constructor() {
         this.$recipesWrapper = document.querySelector('.recipe--section')
+        this.$noresultWrapper = document.querySelector('.noresult--section')
         this.tags = []
         this.allRecipes = recipes.map(recipe => new Recipe(recipe))
-        this.filteredRecipes = this.allRecipes
+        this.filteredRecipes = [...this.allRecipes]
+        this.RecipeMainSearch = new MainSearch(this.filteredRecipes)
         this.IngredientsTags = []
         this.UstensilsTags = []
         this.AppareilsTags = []
-        this.Search = null
+        this.name = 'Fabien'
+    }
+
+    clearRecipesWrapper() {
+        this.$recipesWrapper.innerHTML = ""
+    }
+
+    clearNoResultWrapper() {
+        this.$noresultWrapper.parentElement.classList.add('d-none')
+        this.$noresultWrapper.innerHTML = ""
+    }
+
+    search(query) {
+        const SearchedRecipes = this.RecipeMainSearch.search(query)
+        this.displayRecipes(SearchedRecipes, query)
+    }
+
+
+    onSearch() {
+        document.querySelector('form').addEventListener('keyup', e => {
+            console.log(this)
+            console.log(this.filteredRecipes)
+            console.log(this.name)
+            this.name = 'David'
+            const query = e.target.value
+            if (query.length >= 3) {
+                this.search(query)
+            } else if (query.length === 0) {
+                this.displayRecipes(this.allRecipes)
+            }
+            console.log(this.name)
+        })
+    }
+
+    displayRecipes(Recipes, query) {
+        this.clearRecipesWrapper()
+        this.clearNoResultWrapper()
+
+        if (Object.keys(Recipes).length === 0) {
+            const EmptyContent = new NoResult(query)
+            this.$noresultWrapper.appendChild(EmptyContent.createNoResult())
+            this.$noresultWrapper.parentElement.classList.remove('d-none')
+        } else {
+            Recipes.forEach(Recipe => {
+                const Template = new RecipeCard(Recipe)
+                this.$recipesWrapper.appendChild(Template.createRecipeCard())
+            })
+        }
     }
 
     searchWithTags(ingredientsTags, ustensilsTags, appareilsTags) {
@@ -28,18 +77,18 @@ class App {
         }
 
         // prendre en compte la recherche principale si besoin
-        
+        this.name = 'Aline'
+        console.log(this.name)
+        console.log(this)
         return this.filteredRecipes
     }
 
-    clearRecipeWrapper() {
-        this.$recipesWrapper.innerHTML = ""
-    }
-
     onTagSelect() {
+        console.log(this.name)
         const listElements = document.querySelectorAll('.dropdown-item')
         Array.from(listElements).forEach((element) => {
             element.addEventListener('click', (event) => {
+                
                 if (!this.tags.includes(event.target.innerText)) {
                     let tag = event.target.innerText
                     let type = event.target.getAttribute('data-type')
@@ -59,7 +108,9 @@ class App {
                     }
                     // on fait une recherche avec les tags de chaque type
                     this.filteredRecipes = this.searchWithTags(this.IngredientsTags, this.UstensilsTags, this.AppareilsTags)
-                    this.clearRecipeWrapper()
+                    
+                    console.log(this.filteredRecipes)
+                    this.clearRecipesWrapper()
                     this.filteredRecipes.forEach(recipe => {
                         const Template = new RecipeCard(recipe)
                         this.$recipesWrapper.appendChild(
@@ -68,13 +119,15 @@ class App {
                     })
                     // mettre à jour la liste des mots clés dans les dropdown
                     KeyWordList.init(this.filteredRecipes)
-                    this.onTagSelect()
+                    // this.onTagSelect()
                 }
+                console.log(this.name)
             })
         })
     }
 
     onTagRemove() {
+        console.log(this)
         document.addEventListener('click', (e) => {
             this.filteredRecipes = this.allRecipes
             if (e.target.tagName === 'I' && e.target.classList.contains('delete-tag') && this.tags.includes(e.target.getAttribute('data-item'))) {
@@ -98,7 +151,7 @@ class App {
                 this.filteredRecipes = this.searchWithTags(this.IngredientsTags, this.UstensilsTags, this.AppareilsTags)
                 KeyWordList.init(this.filteredRecipes)
                 this.onTagSelect()
-                this.clearRecipeWrapper()
+                this.clearRecipesWrapper()
                 this.filteredRecipes.forEach(recipe => {
                     const Template = new RecipeCard(recipe)
                     this.$recipesWrapper.appendChild(
@@ -110,9 +163,10 @@ class App {
     }
 
     main() {
-        this.Search = new SearchForm(this.filteredRecipes)
-        this.Search.render()
+        SearchForm = new SearchForm()
+        SearchForm.render()
         KeyWordList.init(this.filteredRecipes)
+        this.onSearch()
         this.onTagSelect()
         this.onTagRemove()
         this.filteredRecipes.forEach(recipe => {
@@ -123,8 +177,6 @@ class App {
         })
     }
 }
-
-
 
 const app = new App()
 app.main()

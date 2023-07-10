@@ -1,16 +1,6 @@
-class Search {
+class MainSearch {
     constructor(Recipes) {
         this.Recipes = Recipes
-    }
-
-    search(query) {
-        return this.filterRecipes(query)
-    }
-}
-
-class RecipeMainSearch extends Search {
-    constructor(Recipes) {
-        super(Recipes)
     }
 
     // Array.filter(condition) retourne un tableau avec les éléments du tableau qui satisfont la condition
@@ -18,7 +8,7 @@ class RecipeMainSearch extends Search {
     // Array.find(condition)   retourne le premier élément qui satisfait la condition
     // Array.some(condition)   retourne true si un élément satisfait la condition
 
-    filterRecipes(query) {
+    search(query) {
         query = query.toLowerCase()
         return this.Recipes.filter(Recipe =>
             Recipe.name.toLowerCase().includes(query) ||
@@ -42,3 +32,4 @@ class RecipeMainSearch extends Search {
         return recipesArray
     }
 }
+
