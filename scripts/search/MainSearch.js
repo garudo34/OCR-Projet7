@@ -18,20 +18,4 @@ class MainSearch {
             recipe.ingredients.some(el => el.ingredient.toLowerCase().includes(query))
         )
     }
-
-    filterRecipesV2(query) {
-        const recipesArray = []
-        query = query.toLowerCase()
-        for (var i = 0; i < this.recipes.length; i++) {
-            if (
-                this.recipes[i].name.toLowerCase().includes(query) || 
-                this.recipes[i].description.toLowerCase().includes(query) || 
-                this.recipes[i].ingredients.some((el) => el.ingredient.toLowerCase().includes(query))
-            ) {
-                recipesArray.push(this.recipes[i]);
-            }
-        }
-        return recipesArray
-    }
 }
-
