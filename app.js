@@ -37,6 +37,9 @@ class App {
         e.preventDefault()
         const query = e.target.value
         if (query.length >= 3) {
+            if (e.key === "Delete" || e.key === "Backspace") {
+                this.fetchRecipes()
+            }
             this.allRecipes = this.search(query)
             this.displayRecipes(this.allRecipes, query)
             KeyWordList.init(this.allRecipes)
