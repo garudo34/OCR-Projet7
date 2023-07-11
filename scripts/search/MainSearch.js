@@ -11,15 +11,6 @@ class MainSearch {
      */
 
     search(query) {
-        query = query.toLowerCase()
-        return this.recipes.filter(recipe =>
-            recipe.name.toLowerCase().includes(query) ||
-            recipe.description.toLowerCase().includes(query) ||
-            recipe.ingredients.some(el => el.ingredient.toLowerCase().includes(query))
-        )
-    }
-
-    filterRecipesV2(query) {
         const recipesArray = []
         query = query.toLowerCase()
         for (var i = 0; i < this.recipes.length; i++) {
@@ -34,4 +25,3 @@ class MainSearch {
         return recipesArray
     }
 }
-
