@@ -107,8 +107,8 @@ export default class KeyWordList {
                 <ul class="dropdown-menu shadow-sm">
                     <li>
                         <div class="input-group mb-3 px-2">
-                            <input type="search" class="form-control search-list" id="search-${this.name.toLowerCase()}" aria-label="${this.name.toLowerCase()}" aria-describedby="basic-addon1">
-                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input type="search" class="form-control search-list" id="search-${this.name.toLowerCase()}" aria-label="${this.name.toLowerCase()}" aria-describedby="${this.name.toLowerCase()}">
+                            <span class="input-group-text" id="${this.name.toLowerCase()}"><i class="fa-solid fa-magnifying-glass"></i></span>
                         </div>
                     </li>
                     ${this.list.map((element) => this.constructor.createListeElement(element, this.type)).join('')}
